@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from workout_api.routers import api_router
 from fastapi.responses import JSONResponse
 from sqlalchemy.exc import IntegrityError
+from fastapi_pagination import add_pagination
 
 
 app = FastAPI(title='WorkoutApi')
@@ -25,3 +26,5 @@ async def integrity_error_handler(request: Request, exc: IntegrityError):
         status_code=status.HTTP_303_SEE_OTHER,
         content={"detail": msg},
     )
+
+add_pagination(app)
